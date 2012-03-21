@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if ! is_installed $*; then
+  echo $2
+  echo /home/$2/.ssh
+  mkdir -p /home/$2/.ssh
+  copy authorized_keys /home/$2/.ssh/
+  copy known_hosts /home/$2/.ssh/
+  chown -R $2:$2 /home/$2/.ssh
+  set_installed $*
+fi

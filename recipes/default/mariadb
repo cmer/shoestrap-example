@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if ! is_installed $*; then
+  apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
+  copy 'mariadb.list' '/etc/apt/sources.list.d/'
+  package_update
+  package 'mariadb-server'
+  package 'libmariadbclient-dev'
+  set_installed $*
+fi

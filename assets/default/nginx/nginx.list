@@ -1,0 +1,2 @@
+deb http://nginx.org/packages/ubuntu/ oneiric nginx
+deb-src http://nginx.org/packages/ubuntu/ oneiric nginx

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if ! is_installed $*; then
+  package 'libreadline-dev'
+
+  run_as deploy 'git clone git://github.com/sstephenson/rbenv.git /home/deploy/.rbenv'
+  copy 'rbenv.profile' '/home/deploy/.rbenv.profile'
+  chown deploy:deploy /home/deploy/.rbenv.profile
+  run_as deploy 'echo "source  ~/.rbenv.profile" >> /home/deploy/.bashrc'
+  run_as deploy 'mkdir -p /home/deploy/.rbenv/plugins'
+  run_as deploy 'git clone git://github.com/sstephenson/ruby-build.git /home/deploy/.rbenv/plugins/ruby-build'
+
+  set_installed $*
+fi

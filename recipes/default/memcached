@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if ! is_installed $*; then
+  adduser 'memcached' '' 'nohome'
+  package 'libevent-dev'
+  cd /tmp
+  curl -O http://memcached.googlecode.com/files/memcached-$2.tar.gz
+  tar xzvf memcached-$2.tar.gz
+  cd memcached-$2
+  ./configure
+  make
+  make install
+
+  mkdir -p /etc/default/
+  echo 'ENABLE_MEMCACHED=yes' > /etc/default/memcached
+  copy 'memcached.conf' '/etc/'
+  copy 'memcached-init' '/etc/init.d/memcached'
+  chmod +x /etc/init.d/memcached
+  update-rc.d memcached defaults
+  set_installed $*
+fi

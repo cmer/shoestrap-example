@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if ! is_installed $*; then
+  copy 'nginx_signing.key' '/tmp/'
+  cd /tmp
+  apt-key add nginx_signing.key
+
+  copy 'nginx.list' '/etc/apt/sources.list.d/'
+  package_update
+  package 'nginx'
+  copy 'nginx.conf' '/etc/nginx/nginx.conf'
+  set_installed $*
+fi

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if ! is_installed $*; then
+  run_as deploy "source /home/deploy/.rbenv.profile; rbenv install $2; rbenv global $2; rbenv rehash"
+  echo "gem: --no-ri --no-rdoc" > /home/deploy/.gemrc; chown deploy:deploy /home/deploy/.gemrc
+  run_as deploy "source /home/deploy/.rbenv.profile; gem install bundler"
+  set_installed $*
+fi

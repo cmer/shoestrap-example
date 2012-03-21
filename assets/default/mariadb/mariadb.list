@@ -1,0 +1,4 @@
+# MariaDB repository list - created 2012-03-21 15:46 UTC
+# http://downloads.askmonty.org/mariadb/repositories/
+deb http://mirror2.hs-esslingen.de/mariadb/repo/5.3/ubuntu oneiric main
+deb-src http://mirror2.hs-esslingen.de/mariadb/repo/5.3/ubuntu oneiric main

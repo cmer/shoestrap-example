@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if ! is_installed $*; then
+  add_line "force_color_prompt=yes" "/home/$2/.bashrc"
+  set_installed $*
+fi
